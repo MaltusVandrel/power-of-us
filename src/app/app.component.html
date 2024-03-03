@@ -1,0 +1,41 @@
+<section class="grid">
+  <aside id="left" class="col">
+    <div>
+      Lv.{{ battleContext.player.level }}
+      {{ battleContext.player.name }}
+      {{ battleContext.player.vitality }}/{{
+        battleContext.player.totalVitality
+      }}
+    </div>
+    <div>
+      Lv.{{ battleContext.foe.level }}
+      {{ battleContext.foe.name }}
+      {{ battleContext.foe.vitality }}/
+      {{ battleContext.foe.totalVitality }}
+    </div>
+  </aside>
+  <main class="col-6">
+    <p-scrollPanel>
+      <p
+        *ngFor="let message of messageHandler.getMessages()"
+        [innerHtml]="message"
+      ></p>
+    </p-scrollPanel>
+    <div>
+      <p-button size="small" (onClick)="battleContext.triggerAction()"
+        >Attack</p-button
+      >
+    </div>
+  </main>
+  <aside id="right" class="col">
+    <h3>Action Turns</h3>
+    <ul>
+      <ng-container
+        *ngFor="let actionTurn of battleContext.actionList; let i = index"
+      >
+        <li *ngIf="i < 11">{{ actionTurn.actor.name }}</li>
+      </ng-container>
+      <li>...</li>
+    </ul>
+  </aside>
+</section>

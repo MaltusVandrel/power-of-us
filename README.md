@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+# PowerOfUs
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A Basic RPG that aims for scenarios that multiply over eachother producing a custom experiance.
 
-## Available Scripts
+# TODO
 
-In the project directory, you can run:
+- subject editor
+- context based actions
+- subject having an empathy value that enables context for domestication/recruitment
+- points and lines map
+- subjects having moods, personalityTraits, sentienceLevel
+- precedural generation of almost everitying
+- skill checks with multiple conditionals
+- having an abstract systams that lets contexts add to the current check/situation
+- having systems that interact with eachother to novel ways
+- having level-caps that can be extended
+- having traits that make easier to obtain skills
+- having level cap in skills that con be extendend
+- phaser for minigames for skillchecks
+- objects and subjects inhearting from types
+- objects and subjecs can have multiple types
+- inhearthed types can provide for context
+- add soundfont (undertale speech effect) for texts
+- Golens being a subject moodlss, personality-less, setience-less
+- poi having half-day of eachother
+- poi having lines that bend to better represent a non linear jorney
 
-### `npm start`
+# GOALS
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- 0.0.1a: slime fight
+- 0.0.2a: map moving, time, slime fights
+- 0.0.3a: secret slime editor
+- 0.0.4a: collecting resources from places
+- 0.0.5a: drops from enemies
+- 0.0.6a: character creator
+- 0.0.7a: a city with a tavern and shops
+- 0.0.8a: a florest with a pound
+- 0.0.9a: place editor
+- 0.0.11a: a simple quest
+- 0.0.Xa: ???
+- 0.1.0b: generated place and world and quests
+- 0.0.Xb: dungeon system - randommy found, monster type, door locked by enemies drops, fun loot, etc
+- 0.0.Xb: trait system - inheretance, random per x levels, choose 3, trade per coins in temple, etc.
+- 0.0.Xb: npc rememberence system - beings may know you and remember your actions, sweying their present actions.
+- 0.0.Xb: npc personality system - beings have traits, aspirations, humors.
+- 0.0.Xb: time system - time passes, children born, people die. a year is a season, 4 seasosn is a year.
