@@ -1,14 +1,15 @@
-import { Being } from '../../model/being';
+import { Figure } from "../../model/figure";
 import { CalcUtil } from '../../util/calc-util';
+import { setAttributes } from "./attribute-setter";
+import { setGauges } from "./gauge-setter";
 
 export let SLIME_BUILDER = {
-  getASlime(level: number): Being {
-    let being: Being = new Being();
+  getASlime(level: number): Figure {
+    let being: Figure = new Figure();
     being.name = 'Slime';
     being.level = level;
-    being.baseVitality = 4;
-    being.totalVitality = being.vitality = being.baseVitality * (level + 2);
-    being.strength = 1;
+    setGauges(being);
+    setAttributes(being);
     return being;
   },
 };

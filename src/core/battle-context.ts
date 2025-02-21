@@ -1,34 +1,38 @@
-import { Injectable } from '@angular/core';
-import { Being } from '../model/being';
+
+import { Figure } from '../model/figure';
 import { CalcUtil } from '../util/calc-util';
 import { Context } from './context';
 import { MessageHandler } from './message-handler';
 import { first } from 'rxjs';
+import { ATTRIBUTE_KEYS } from '../data/bank/attribute';
+import { GAUGE_KEYS } from '../data/bank/gauge';
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class BattleContext extends Context {
   public static defaultTurnTiming: number = 6000;
   public type: String = 'battle';
-  public player: Being = new Being();
-  public foe: Being = new Being();
+  public player: Figure = new Figure();
+  public foe: Figure = new Figure();
   public elapsedTime: number = 0;
   public choosingAction?: Promise<boolean>;
-  public actionList: { actor: Being; time: number }[] = [];
+  public actionList: { actor: Figure; time: number }[] = [];
 
   constructor(private messageHandler: MessageHandler) {
     super();
   }
-  public setParticipants(player: Being, foe: Being) {
+  public setParticipants(player: Figure, foe: Figure) {
     this.foe = foe;
     this.player = player;
+    console.log('player', this.player);     
   }
 
-  private getListOrder(): Being[] {
+  private getListOrder(): Figure[] {
     let playerInitiative = this.player.getInitiative();
     let foeInitiative = this.foe.getInitiative();
     let percentage60 = 1.6;
-    let a: Being;
-    let b: Being;
+    let a: Figure;
+    let b: Figure;
     if (playerInitiative >= foeInitiative * percentage60) {
       a = this.player;
       b = this.foe;
@@ -37,8 +41,8 @@ export class BattleContext extends Context {
       b = this.player;
     } else {
       if (
-        CalcUtil.getRandom(this.player.luck) >=
-        CalcUtil.getRandom(this.foe.luck)
+        CalcUtil.getRandom(this.player.getAttribute(ATTRIBUTE_KEYS.LUCK).value) >=
+        CalcUtil.getRandom(this.foe.getAttribute(ATTRIBUTE_KEYS.LUCK).value)
       ) {
         a = this.player;
         b = this.foe;
@@ -50,7 +54,7 @@ export class BattleContext extends Context {
     return [a, b];
   }
   private buildActionList() {
-    let order: Being[] = this.getListOrder();
+    let order: Figure[] = this.getListOrder();
     let fist = true;
 
     for (let being of order) {
@@ -68,7 +72,7 @@ export class BattleContext extends Context {
     });
   }
 
-  private getTarget(being: Being) {
+  private getTarget(being: Figure) {
     if (being == this.player) {
       return this.foe;
     } else {
@@ -86,20 +90,20 @@ export class BattleContext extends Context {
       'A battle between <span class="bold">' +
         this.player.name +
         '(' +
-        this.player.totalVitality +
+        this.player.getGauge(GAUGE_KEYS.VITALITY).getCurrent() +
         'hp)' +
         '</span> and <span class="bold">' +
         this.foe.name +
         '(' +
-        this.foe.totalVitality +
+        this.foe.getGauge(GAUGE_KEYS.VITALITY).getCurrent() +
         'hp) </span> ' +
         ' has begun!'
     );
 
     while (
       this.actionList.length > 0 &&
-      this.foe.vitality > 0 &&
-      this.player.vitality > 0
+      this.foe.getGauge(GAUGE_KEYS.VITALITY).getCurrent() > 0 &&
+      this.player.getGauge(GAUGE_KEYS.VITALITY).getCurrent() > 0
     ) {
       let actionTurn = this.actionList.shift();
       if (actionTurn) {
@@ -118,14 +122,14 @@ export class BattleContext extends Context {
       }
     }
     let being = this.player;
-    if (this.foe.vitality > 0) being = this.foe;
+    if (this.foe.getGauge(GAUGE_KEYS.VITALITY).getCurrent() > 0) being = this.foe;
     this.messageHandler.add(
       '<span class="bold">' + being.name + '</span> won the battle!'
     );
   }
-  private getAttack(a: Being, b: Being): string {
+  private getAttack(a: Figure, b: Figure): string {
     let attackPower = 3;
-    let strengthInfluence = 1 + a.strength / 10;
+    let strengthInfluence = 1 + a.getAttribute(ATTRIBUTE_KEYS.STRENGTH).value / 10;
     let levelDiffInfluence = 1 + (a.level - b.level / 10) / 100;
     let damage =
       attackPower *
@@ -133,7 +137,7 @@ export class BattleContext extends Context {
       strengthInfluence *
       (CalcUtil.getAValueBetween(80, 120) / 100);
     damage = Math.round(damage);
-    b.vitality -= damage;
+    b.getGauge(GAUGE_KEYS.VITALITY).consumed += damage;
     return (
       '<span class="bold">' +
       a.name +

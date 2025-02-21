@@ -1,17 +1,10 @@
 <section class="grid">
   <aside id="left" class="col">
     <div>
-      Lv.{{ battleContext.player.level }}
-      {{ battleContext.player.name }}
-      {{ battleContext.player.vitality }}/{{
-        battleContext.player.totalVitality
-      }}
+      {{ currentStatus(battleContext.player)}}
     </div>
     <div>
-      Lv.{{ battleContext.foe.level }}
-      {{ battleContext.foe.name }}
-      {{ battleContext.foe.vitality }}/
-      {{ battleContext.foe.totalVitality }}
+      {{ currentStatus(battleContext.foe)}}
     </div>
   </aside>
   <main class="col-6">

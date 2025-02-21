@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { Being } from '../model/being';
+
+import { Figure } from '../model/figure';
 import { CalcUtil } from '../util/calc-util';
 import { HERO_BUILDER } from '../data/builder/hero-builder';
 import { SLIME_BUILDER } from '../data/builder/slime-builder';
 import { BattleContext } from '../core/battle-context';
 import { MessageHandler } from '../core/message-handler';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { Component, OnInit } from '@angular/core';
+import { GAUGE_KEYS } from '../data/bank/gauge';
 
 @Component({
   selector: 'app-root',
@@ -28,5 +30,9 @@ export class AppComponent implements OnInit {
 
     this.battleContext.setParticipants(hero, slime);
     this.battleContext.run();
+  }
+  currentStatus(figure:Figure){
+    let vitality=figure.getGauge(GAUGE_KEYS.VITALITY);
+    return 'Lv.'+figure.level+" "+figure.name+" "+vitality.getCurrent()+"/"+vitality.value;
   }
 }
